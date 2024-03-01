@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible show" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %} 
+<br/>
+<div class="shadow p-3 mb-5 bg-body rounded">
+<br/>
+<form method="POST">
+    {{form.hidden_tag()}}
+
+    {{form.timestamp.label(class="form-label")}}
+    {{form.timestamp(class="form-control")}}
+    <br/>
+    {{form.value.label(class="form-label")}}
+    {{form.value(class="form-control")}}
+    <br/>
+    {{form.notes.label(class="form-label")}}
+    {{form.notes(class="form-control", rows='5')}}
+    <br/>
+    {{form.submit(class="btn btn-dark")}}
+</form>
+</div>
+<a href="{{url_for('trackers')}}" class="btn btn-outline-secondary btn-sm">Go Back</a>
+{% endblock %}

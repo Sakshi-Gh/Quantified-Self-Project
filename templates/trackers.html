@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible show" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>  
+{% endfor %}
+<h1>All Trackers</h1>
+<br/>
+{% for tracker in trackers %}
+  {% if tracker.user_id == current_user.id %} 
+  <div class="shadow p-3 mb-5 bg-body rounded">
+    <h2>{{tracker.title}}</h2><br/>
+    <b>Type</b> : {{tracker.type}}<br/>
+    <b>Date and Time Created</b> : {{tracker.date_posted}}<br/>
+    <b>Description</b> : {{tracker.desc}}<br/>
+    <b>Settings</b> : {{tracker.settings}}<br/><br/>
+    {% if tracker.user_id == current_user.id %}
+    <a href="{{url_for('tracker', id=tracker.id)}}" class="btn btn-outline-secondary btn-sm">View Tracker</a>
+    <a href="{{url_for('edit_tracker', id=tracker.id)}}" class="btn btn-outline-secondary btn-sm">Edit Tracker</a>
+    <a href="{{url_for('delete_tracker', id=tracker.id)}}" class="btn btn-outline-danger btn-sm">Delete Tracker</a>
+    <a href="{{url_for('add_logs')}}" class="btn btn-outline-primary btn-sm">Add Log</a>
+    <a href="{{url_for('logs', id=tracker.id)}}" class="btn btn-outline-primary btn-sm">View Logs</a>
+    {% endif %}
+    <br/>
+  </div>
+  <br/>
+  {% endif %}
+{% endfor %}
+{% endblock %}

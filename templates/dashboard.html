@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+<h1>Dashboard</h1>
+<br/>
+<div class="card">
+  <div class="card-header">
+    {{current_user.username}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Welcome to your User Dashboard</h5>
+    <p class="card-text">
+      <strong>Username : </strong>{{current_user.username}}<br/>
+      <strong>Name : </strong>{{current_user.name}}<br/>
+      <strong>User Id : </strong>{{current_user.id}}<br/>
+      <strong>Email : </strong>{{current_user.email}}<br/>
+      <strong>Date Joined : </strong>{{current_user.date_added}}<br/></p>
+    <a href="{{url_for('logout')}}" class="btn btn-secondary btn-sm">Log Out</a>
+    <a href="{{url_for('update', id=current_user.id)}}" class="btn btn-secondary btn-sm">Update Profile</a>
+    <a href="{{url_for('delete', id=current_user.id)}}" class="btn btn-danger btn-sm">Delete</a> 
+  </div>
+</div>
+
+<br/><br/>
+
+
+{% endblock %}

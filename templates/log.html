@@ -1,0 +1,24 @@
+<!--RETURNS INDIVIDUAL Log-->
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible show" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %} 
+<br/>
+<div class="shadow p-3 mb-5 bg-body rounded">
+  <b>Timestamp</b> : {{log.timestamp}}<br/>
+  <b>Value</b> : {{log.value}}<br/>
+  <b>Date and Time</b> : {{log.added_date_time}}<br/>
+  <b>Notes</b> : {{log.notes}}<br/>
+</div>
+<a href="{{url_for('trackers')}}" class="btn btn-outline-secondary btn-sm">Go Back</a>
+<a href="{{url_for('edit_log', id=log.id)}}" class="btn btn-outline-secondary btn-sm">Edit Log</a>
+<a href="{{url_for('delete_log', id=log.id)}}" class="btn btn-outline-secondary btn-sm">Delete Log</a>
+<br/>
+
+{% endblock %}
